@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de cumparaturi</title>
+
+    <style>
+        body {
+            background-color: blanchedalmond;
+            margin: auto;
+            padding: 50px;
+        }
+
+        .main {
+            background-color: rgb(236, 219, 164);
+            width: 700px;
+            margin: auto;
+            padding: 50px;
+
+        }
+
+        .clasaInput {
+            width: 200px;
+            font-size: 1.2em;
+        }
+
+        .addButton {
+            background-color: rgb(36, 75, 0);
+            color: rgb(236, 219, 164);
+            width: 130px;
+            border-radius: 5%;
+            font-size: 1.1em;
+        }
+
+        .addButton:hover {
+            background-color: rgba(36, 75, 0, 0.27);
+            color: black;
+        }
+
+        .divInput {
+            display: flex;
+            justify-content: space-between;
+            width: 400px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        table {
+            margin-top: 30px;
+            width: 50%;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .buyed {
+            background-color: rgb(36, 75, 0);
+            color: rgb(236, 219, 164);
+            border-radius: 5%;
+
+        }
+        .strike{
+            text-decoration: line-through;
+        }
+    </style>
+
+    <script>
+
+        let list = [];
+        function markAsBuyed (i){
+        let elem = document.getElementsByName ("produsAdaugat");
+           for (let i in elem){
+               elem[i].classList.add("strike");
+
+           }
+        }
+
+
+        function adauga(form,event) {
+            event.preventDefault();          
+            let nume = form.querySelector("[name='elementNou']").value.trim();
+            list.push(nume);
+            draw();
+            document.querySelector("form").reset();
+        }
+
+
+        function showTable() {
+            document.querySelector("#newTab").classList.remove ("hidden");
+            draw();
+        }
+
+        function draw() {
+             
+            let str = "";
+            for (i = 0; i < list.length; i++) {
+                 str += `<tr>
+            <td><span name="produsAdaugat"> ${list[i]} </span></td> 
+            <td><input class="buyed" type="button" onclick="markAsBuyed(i);" value="Mark as buyed"></td>           
+                         </tr>`;
+            }
+           
+            document.querySelector("#newTab tbody").innerHTML = str;
+            
+        
+        }
+        
+
+    </script>
+</head>
+
+<body onload="draw()">
+    <div class="main">
+        <h1> Shopping List </h1>
+        <div class="divInput">
+            <form id="produs" onsubmit="adauga(this,event);">
+                <input class="clasaInput" type="text" name="elementNou" placeholder="...">
+                <input type="submit" class="addButton" onclick="showTable();" value="Add item">
+            </form>
+        </div>
+        <br>
+        <div>
+
+        </div>
+        <br>
+        <div>
+            <table id="newTab" class="hidden">
+                <thead>
+                    <tr>
+                        <th style="width: 60%; font-size: 1.1em">Item</th>
+                        <th style="width: 60%; font-size: 1.1em"> Action </th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+
+        </div>
+
+</body>
+
+</html>
