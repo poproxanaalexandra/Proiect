@@ -59,18 +59,16 @@ function drawForecast() {
             ziuaZero++;
             day = date;
             forecastZile[ziuaZero].innerHTML = `<h3>${date}</h3>`
-
         }
 
-        forecastZile[ziuaZero].innerHTML += `
+        forecastZile[ziuaZero].innerHTML + `
     <div>
       <img src="http://openweathermap.org/img/w/${forecast.list[i].weather[0].icon}.png">          
       <p>Time: ${time}</p>
       <p>${forecast.list[i].weather[0].description}</p>
       <p>Temperature: ${forecast.list[i].main.temp.toFixed(0)} &#8451</p>
       
-    </div>
-  `
+    </div>`
     }
 }
 
