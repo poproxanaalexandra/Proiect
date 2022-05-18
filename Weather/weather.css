@@ -21,11 +21,12 @@
         }
         .oraLocala{
             font-size: 1.5em;
-            color: rgba(255, 255, 255, 0.689);
+            color: rgba(255, 255, 255, 0.729);
             margin: auto 700px auto 150px;
             background-color: rgba(95, 158, 160, 0.729);
             width: 204.5px;
             height: fit-content;
+
         }
 
         .weatherNow {
