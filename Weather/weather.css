@@ -10,15 +10,22 @@
         }
 
         .clock {
+            background-color: rgba(95, 158, 160, 0.729);
+            width: fit-content;
+            height: fit-content;
+
             align-self: flex-end;
             font-size: 5em;
             margin: auto auto auto 150px;
-            color: rgba(205, 206, 207, 0.362);
+            color: rgb(255, 255, 255);
         }
         .oraLocala{
             font-size: 1.5em;
-            color: rgba(205, 206, 207, 0.362);
-            margin: auto auto auto 150px;
+            color: rgba(255, 255, 255, 0.689);
+            margin: auto 700px auto 150px;
+            background-color: rgba(95, 158, 160, 0.729);
+            width: 204.5px;
+            height: fit-content;
         }
 
         .weatherNow {
@@ -76,7 +83,7 @@
             letter-spacing: 2px;
 
         }
-
+        
 
 
         .oras {
@@ -138,11 +145,15 @@
             text-align: center;
             font-size: 1.5em;
             font-weight: 300;
+            align-content: center;
         }
 
         #humidity,
-        #hPA,
         #min,
         #max {
             font-size: 2.5em;
+        }
+
+        #hPA{
+            font-size: 1.75em; 
         }

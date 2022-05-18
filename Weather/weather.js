@@ -27,12 +27,12 @@ async function getForecast() {
 
 
 function draw() {
-    //document.querySelector(".weatherNow").classList.remove(none);
+    //document.querySelector(".all").classList.remove(hidden);
     document.querySelector("#localitate").innerHTML = document.querySelector(".oras").value.trim();
     document.querySelector("#pic").src = `http://openweathermap.org/img/w/${vremeaAcum.weather[0].icon}.png`
     document.querySelector("#description").innerHTML = vremeaAcum.weather[0].description;
-    document.querySelector("#humidity").innerHTML = vremeaAcum.main.humidity;
-    document.querySelector("#hPA").innerHTML = vremeaAcum.main.pressure;
+    document.querySelector("#humidity").innerHTML = vremeaAcum.main.humidity + "&#65285";
+    document.querySelector("#hPA").innerHTML = vremeaAcum.main.pressure + " hPa";
     document.querySelector("#temp").innerHTML = vremeaAcum.main.temp.toFixed(0) + "&#8451";
     document.querySelector("#max").innerHTML = vremeaAcum.main.temp_max.toFixed(0) + "&#8451";
     document.querySelector("#min").innerHTML = vremeaAcum.main.temp_min.toFixed(0) + "&#8451";
@@ -49,7 +49,7 @@ function drawForecast() {
     let ziuaZero = 0;
     let dateTime = forecast.list[0].dt_txt.split(" ");
     let day = dateTime[0];
-    forecastZile[ziuaZero].innerHTML = `<h3>${dateTime[0]}</h3>`
+    forecastZile[ziuaZero].innerHTML + `<h3>${dateTime[0]}</h3>`
     
     
     for (let i = 0; i < forecast.list.length; i++) {
@@ -58,8 +58,7 @@ function drawForecast() {
         if (day !== date) {
             ziuaZero++;
             day = date;
-            forecastZile[ziuaZero].innerHTML = `<h3>${date}</h3>`
-
+            forecastZile[ziuaZero].innerHTML += `<h3>${date}</h3>`
         }
 
         forecastZile[ziuaZero].innerHTML += `
@@ -69,8 +68,7 @@ function drawForecast() {
       <p>${forecast.list[i].weather[0].description}</p>
       <p>Temperature: ${forecast.list[i].main.temp.toFixed(0)} &#8451</p>
       
-    </div>
-  `
+    </div>`
     }
 }
 
