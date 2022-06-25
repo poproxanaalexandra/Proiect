@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Produse</title>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+
+  <link rel="stylesheet" type="text/css" href="D:\SIIT\Proiect final\resources\grid.css" />  
+ 
+  
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="D:\SIIT\Proiect final\resources\general.css" />
+    
+  
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+    crossorigin="anonymous"></script>
+
+  <script>
+
+
+function addCos(i) {
+            var depasit = false;
+            var found = false;
+            let cantitate = 1;
+            let stoc = list.produse[i].stoc;
+
+            if (stoc >= cantitate) {
+                var produs = {
+                   
+                    imagine: list.produse[i].imagine,
+                    nume: list.produse[i].nume,
+                    pret: list.produse[i].pret,
+                    cantitate: cantitate,
+                    i: i
+                }
+                let cos = localStorage.getItem("cos");
+                if (cos === null) {
+                    cos = [];
+                } else {
+                    cos = JSON.parse(cos);
+                }
+
+                for (let p of cos) {
+                    if ((p.i === (i.toString())) || (p.i === i)) {
+                        if (p.stoc - cantitate >= 0) {
+                            p.stoc = p.stoc - cantitate;
+                            p.cantitate += cantitate;
+                            found = true;
+                            stoc = p.stoc;
+                            alert('Produsul a fost adaugat in cos')
+                        } else {
+                            depasit = true;
+                            alert('Cantitatea selectata depaseste stocul')
+                        }
+
+                    }
+                }
+
+                if ((!found) & (!depasit)) {
+                    cos.push({...produs, stoc: stoc});
+                }
+
+                localStorage.setItem("cos", JSON.stringify(cos));
+            } else { alert(`Cantitatea selectata depaseste stocul. Stoc maxim ${stoc}`) }
+        }
+
+    
+
+    let list = [];
+    async function draw() {
+      let url = "https://proiect-final-b6d3a-default-rtdb.europe-west1.firebasedatabase.app/"
+      var response = await fetch(url + ".json");
+      list = await response.json();
+     
+      let bisc, faina, snack, paste = {};
+      for (let i in list.produse){
+          if (list.produse[i] === null) {
+            continue;
+          }
+          if (list.produse[i].tag === "faina") {
+              faina = `
+
+              <div id="prod_${i}" class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="product-item">
+                            <div class="position-relative bg-light overflow-hidden">
+                                <img class="img-fluid w-100" src= ${list.produse[i].imagine} alt="">
+                                <div class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">In stoc</div>
+                            </div>
+                            <div class="text-center p-4">
+                                <a class="d-block h6 mb-1" href="../detalii.html?id=${i}">${list.produse[i].nume}</a>
+                                <span class="text-dark me-1">${list.produse[i].pret} lei </span>
+                                
+                            </div>
+                            <div class="d-flex border-top">
+                                <small class="w-50 text-center border-end py-2">
+                                  <a href="../detalii.html?id=${i}" class="btn btn-secondary active" role="button" aria-pressed="true">Detalii</a>
+                                </small>
+                                <small class="w-50 text-center py-2">
+                                  <a class="btn btn-secondary active" role="button" aria-pressed="true" onclick="addCos(${i})">Adauga in cos</a>
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+              
+              
+              `
+              document.querySelector("#tab1").innerHTML += faina;
+            }
+
+            if (list.produse[i].tag === "biscuiti") {
+              bisc = `
+
+              <div class="col-xl-3 col-lg-4 col-md-6">
+                        <div class="product-item">
+                            <div class="position-relative bg-light overflow-hidden">
+                                <img class="img-fluid w-100" src=${list.produse[i].imagine} alt="">
+                                <div class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">In stoc</div>
+                            </div>
+                            <div class="text-center p-4">
+                                <a class="d-block h6 mb-1" href="../detalii.html?id=${i}">${list.produse[i].nume}</a>
+                                <span class="text-dark me-1">${list.produse[i].pret} lei </span>
+                                
+                            </div>
+                            <div class="d-flex border-top">
+                                <small class="w-50 text-center border-end py-2">
+                                  <a href="../detalii.html?id=${i}" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">Detalii</a>
+                                </small>
+                                <small class="w-50 text-center py-2">
+                                  <a class="btn btn-secondary btn-sm active" role="button" aria-pressed="true" onclick="addCos(${i})" >Adauga in cos</a>
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+              
+              
+              `
+              document.querySelector("#tab2").innerHTML += bisc;
+            }
+
+            if (list.produse[i].tag === "paste") {
+              paste = `
+
+              <div class="col-xl-3 col-lg-4 col-md-6">
+                        <div class="product-item">
+                            <div class="position-relative bg-light overflow-hidden">
+                                <img class="img-fluid w-100" src=${list.produse[i].imagine} alt="">
+                                <div class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">In stoc</div>
+                            </div>
+                            <div class="text-center p-4">
+                              <a class="d-block h6 mb-1" href="../detalii.html?id=${i}">${list.produse[i].nume}</a>
+                                <span class="text-secondary me-1">${list.produse[i].pret} lei </span>
+                                
+                            </div>
+                            <div class="d-flex border-top">
+                                <small class="w-50 text-center border-end py-2">
+                                  <a href="../detalii.html?id=${i}" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">Detalii</a>
+                                </small>
+                                <small class="w-50 text-center py-2">
+                                  <button class="btn btn-secondary btn-sm active" role="button" aria-pressed="true" onclick="addCos(${i})"> <i class="fa fa-shopping-bag text-primary me-2"></i> Adauga in cos</button>
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+              
+              
+              `
+              document.querySelector("#tab3").innerHTML += paste;
+            }
+          }
+      }
+
+  
+  </script>  
+
+
+
+</head>
+
+
+<body onload="draw()">
+  <nav class="navbar-custom sticky-top navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="D:\SIIT\Proiect final\Home\index.html">
+        <h4>GlutenFree</h4>
+        <h6> Store & more</h6>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#"> Articole </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="D:\SIIT\Proiect final\Produse\produse.html"> Magazin </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Retete
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">Dulciuri</a></li>
+              <li><a class="dropdown-item" href="#">Aperitive sarate</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">#naturalfaragluten</a></li>
+            </ul>
+          </li>
+
+        </ul>
+        <button type="button" class="btn btn-default btn-lg" aria-label="Right Align" onclick="location.href='cos.html'">
+          <img
+            src="https://firebasestorage.googleapis.com/v0/b/proiect-final-b6d3a.appspot.com/o/cart.png?alt=media&token=aa2e1d96-a361-4e01-af1d-74830dc3716b"
+            class="cart"> Cos
+          
+        </button>
+        <button type="button" class="btn btn-default btn-lg" aria-label="Right Align">
+          <img
+            src="https://firebasestorage.googleapis.com/v0/b/proiect-final-b6d3a.appspot.com/o/account.png?alt=media&token=b4321af8-d676-43ac-8a41-6d93f0058a1a"
+            class="cart"> Admin
+          <a href="#"></a>
+        </button>
+
+      </div>
+    </div>
+  </nav>
+
+
+  <div class="carouselProduse">
+    <div id="carouselExampleIndicators" class="carousel carousel-dark slide" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+          aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+          aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+          aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img
+            src="https://firebasestorage.googleapis.com/v0/b/proiect-final-b6d3a.appspot.com/o/biscuiti%20friends.webp?alt=media&token=96949ec5-b1aa-4119-800a-0200aa55144f"
+            class="d-block w-100" alt="...">
+            <a href="D:/SIIT/Proiect%20final/detalii.html?id=6"></a>
+        </div>
+        <div class="carousel-item">
+          <img
+            src="https://firebasestorage.googleapis.com/v0/b/proiect-final-b6d3a.appspot.com/o/scharmix.jpg?alt=media&token=3e66cce4-5a4a-471c-8e16-796597aeacb3"
+            class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img
+            src="https://firebasestorage.googleapis.com/v0/b/proiect-final-b6d3a.appspot.com/o/covrigei.jpg?alt=media&token=bb6c5250-5d06-40a2-be61-6a06567ba749"
+            class="d-block w-100" alt="...">
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+
+  </div>
+
+
+  <div class="container-xxl py-5 bg-transparent">
+    <div class="container">
+        <div class="row g-0 gx-5 align-items-end">
+            <div class="col-lg-6">
+                <div class="section-header text-start mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+                    <h1 class="display-5 mb-3">Produse fara gluten</h1>
+                    
+                </div>
+            </div>
+            <div class="col-lg-6 text-start text-lg-end wow slideInRight" data-wow-delay="0.1s">
+                <ul class="nav nav-pills d-inline-flex justify-content-end mb-5">
+                    <li class="nav-item me-2">
+                        <a class="btn btn-outline-primary border-2 active" data-bs-toggle="pill" href="#tab-1">Făină fără gluten</a>
+                    </li>
+                    <li class="nav-item me-2">
+                        <a class="btn btn-outline-primary border-2" data-bs-toggle="pill" href="#tab-2">Biscuiți </a>
+                    </li>
+                    <li class="nav-item me-2">
+                        <a class="btn btn-outline-primary border-2" data-bs-toggle="pill" href="#tab-3">Paste</a>
+                    </li>
+                    <li class="nav-item me-0">
+                      <a class="btn btn-outline-primary border-2" data-bs-toggle="pill" href="#tab-4">Alte produse</a>
+                  </li>
+                </ul>
+            </div>
+        </div>
+        <div class="tab-content">
+            <div id="tab-1" class="tab-pane fade show p-0 active">
+                <div id="tab1" class="row g-4">
+                    
+                </div>
+            </div>
+            <div id="tab-2" class="tab-pane fade show p-0">
+                <div id="tab2" class="row g-4">
+                
+                </div>
+            </div>
+            <div id="tab-3" class="tab-pane fade show p-0">
+                <div id="tab3" class="row g-4">
+                 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+
+</body>
+
+</html>

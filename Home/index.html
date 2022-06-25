@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="D:\SIIT\Proiect final\resources\grid.css" /> 
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="D:\SIIT\Proiect final\resources\general.css" />
+
+    
+    <script>  
+    var listaArticole = {};
+    async function draw() {
+      let url = "https://proiect-final-b6d3a-default-rtdb.europe-west1.firebasedatabase.app/"
+      var response = await fetch(url + ".json");
+      listaArticole = await response.json();
+      console.log (listaArticole.articole);
+      let str = "";
+      for (let i in listaArticole.articole) {
+                str += `
+                
+                        <div>
+                            <h1> ${listaArticole.articole[i].titlu} </h1>
+                            <hr>
+                        </div>
+                        <br>
+                        <div>
+                          <p> ${listaArticole.articole[i].continut} </p>
+                        
+                        </div>
+                        <br><br><br><br>
+                    
+                 
+            `;
+        document.querySelector("#articole").innerHTML = str;
+          }
+    }
+
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+</head>
+<body>
+  <nav class="navbar-custom sticky-top navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="D:\SIIT\Proiect final\Home\index.html">
+        <h4>GlutenFree</h4>
+        <h6> Store & more</h6>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#" onclick="draw()"> Articole </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="D:\SIIT\Proiect final\Produse\produse.html"> Magazin </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Retete
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">Dulciuri</a></li>
+              <li><a class="dropdown-item" href="#">Aperitive sarate</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">#naturalfaragluten</a></li>
+            </ul>
+          </li>
+
+        </ul>
+        <button type="button" class="btn btn-default btn-lg" aria-label="Right Align">
+          <img
+            src="https://firebasestorage.googleapis.com/v0/b/proiect-final-b6d3a.appspot.com/o/cart.png?alt=media&token=aa2e1d96-a361-4e01-af1d-74830dc3716b"
+            class="cart"> Cos
+          <a href="#"></a>
+        </button>
+        <button type="button" class="btn btn-default btn-lg" aria-label="Right Align">
+          <img
+            src="https://firebasestorage.googleapis.com/v0/b/proiect-final-b6d3a.appspot.com/o/account.png?alt=media&token=b4321af8-d676-43ac-8a41-6d93f0058a1a"
+            class="cart"> Admin
+          <a href="#"></a>
+        </button>
+
+      </div>
+    </div>
+  </nav>
+
+    <div id="articole">
+
+    </div>
+    
+</body>
+</html>
