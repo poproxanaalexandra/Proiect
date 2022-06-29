@@ -159,11 +159,12 @@ var idxEdit=null;
 </head>
 
 <body onload="draw()">
-    <nav class="navbar-custom sticky-top navbar-expand-lg">
+    <!-- Navbar Start -->
+    <nav class="navbar-custom sticky-top navbar-expand-lg" data-wow-delay="0.1s">
         <div class="container-fluid">
             <a class="navbar-brand" href="D:\SIIT\Proiect final\Home\index.html">
                 <h4>GlutenFree</h4>
-                <h6>Store & more</h6>
+                <h6> Store & more</h6>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -173,14 +174,10 @@ var idxEdit=null;
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">
-                            Articole
-                        </a>
+                        <a class="nav-link active" aria-current="page" href="#"> Articole </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="D:\SIIT\Proiect final\Produse\produse.html">
-                            Magazin
-                        </a>
+                        <a class="nav-link" href="D:\SIIT\Proiect final\Produse\produse.html"> Magazin </a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -191,29 +188,30 @@ var idxEdit=null;
                             <li><a class="dropdown-item" href="#">Dulciuri</a></li>
                             <li><a class="dropdown-item" href="#">Aperitive sarate</a></li>
                             <li>
-                                <hr class="dropdown-divider" />
+                                <hr class="dropdown-divider">
                             </li>
-                            <li>
-                                <a class="dropdown-item" href="#">#naturalfaragluten</a>
-                            </li>
+                            <li><a class="dropdown-item" href="#">#naturalfaragluten</a></li>
                         </ul>
                     </li>
+
                 </ul>
-                <button type="button" class="btn btn-default btn-lg" aria-label="Right Align"
-                    onclick="location.href='cos.html'">
-                    <img src="https://firebasestorage.googleapis.com/v0/b/proiect-final-b6d3a.appspot.com/o/cart.png?alt=media&token=aa2e1d96-a361-4e01-af1d-74830dc3716b"
-                        class="cart" />
-                    Cos
+                <button type="button" class="btn btn-default btn-lg" aria-label="Right Align">
+                    <a class="nav-link" href="D:\SIIT\Proiect final\Produse\cos.html">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/proiect-final-b6d3a.appspot.com/o/cart.png?alt=media&token=aa2e1d96-a361-4e01-af1d-74830dc3716b"
+                            class="cart"> Cos
+                    </a>
                 </button>
                 <button type="button" class="btn btn-default btn-lg" aria-label="Right Align">
-                    <img src="https://firebasestorage.googleapis.com/v0/b/proiect-final-b6d3a.appspot.com/o/account.png?alt=media&token=b4321af8-d676-43ac-8a41-6d93f0058a1a"
-                        class="cart" />
-                    Admin
-                    <a href="#"></a>
+                    <a class="nav-link" href="D:\SIIT\Proiect final\admin.html">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/proiect-final-b6d3a.appspot.com/o/account.png?alt=media&token=b4321af8-d676-43ac-8a41-6d93f0058a1a"
+                            class="cart"> Admin
+                    </a>
                 </button>
             </div>
         </div>
     </nav>
+
+    <!-- Navbar End -->
 
 
     <!-- Table -->
@@ -274,7 +272,7 @@ var idxEdit=null;
             <div class="input-group-prepend">
                 <span class="input-group-text">Stoc</span>
             </div>
-            <input type="text" id="stocProdus" class="form-control" placeholder="" aria-label="0"
+            <input type="number" id="stocProdus" class="form-control" placeholder="" aria-label="0"
                 aria-describedby="basic-addon1">
         </div>
 
